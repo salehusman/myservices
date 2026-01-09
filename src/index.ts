@@ -30,13 +30,13 @@ app.get('/api/data', async (req, res) => {
 	try {
 		const { results } = await env.DB.prepare('SELECT * FROM my_data').all();
 
-		res.json({ success: true, members: results });
+		res.json({ success: true, data: results });
 	} catch (error) {
 		res.status(500).json({ success: false, error: 'Failed to fetch members' });
 	}
 });
 
-app.put("/api/members/:id", async (req, res) => {
+app.put("/api/data", async (req, res) => {
 	try {
 		const { data } = req.body;
 		const result = await env.DB.prepare(
@@ -46,18 +46,18 @@ app.put("/api/members/:id", async (req, res) => {
 		if (result.meta.changes === 0) {
 			return res
 				.status(404)
-				.json({ success: false, error: "Member not found" });
+				.json({ success: false, error: "couldn't update" });
 		}
 
-		res.json({ success: true, message: "Member updated successfully" });
+		res.json({ success: true, message: "data updated successfully" });
 	} catch (error: any) {
-		if (error.message?.includes("UNIQUE constraint failed")) {
-			return res.status(409).json({
-				success: false,
-				error: "Email already exists",
-			});
-		}
-		res.status(500).json({ success: false, error: "Failed to update member" });
+		// if (error.message?.includes("UNIQUE constraint failed")) {
+		// 	return res.status(409).json({
+		// 		success: false,
+		// 		error: "Email already exists",
+		// 	});
+		// }
+		res.status(500).json({ success: false, error: "Failed to update data" });
 	}
 });
 
