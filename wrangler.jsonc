@@ -4,12 +4,22 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "mani_data",
+			"database_id": "6e7a30d2-df32-471e-99bd-99d3d43bf072"
+		}
+	],
 	"name": "express-d1-app",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-09-27",
 	"observability": {
 		"enabled": true
-	}
+	},
+	"compatibility_flags": [
+		"nodejs_compat"
+	]
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
